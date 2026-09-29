@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>A1 Staff - Add Vehicle</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f1f5f9;
+    font-family: Arial, sans-serif;
+    color: #0f172a;
+}
+
+.header {
+    background: #020617;
+    color: white;
+    padding: 18px 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 21px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logout {
+    background: #dc2626;
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.card h2 {
+    margin-bottom: 8px;
+}
+
+.welcome {
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field label {
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.field input,
+.field select,
+.field textarea {
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.submit {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    background: #2563eb;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background: #1d4ed8;
+}
+
+.message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    display: none;
+}
+
+.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+@media(max-width:650px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: auto;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <h1>A1 Car Detailing Factory</h1>
+
+    <div class="header-right">
+
+        <span id="staffName">
+            Staff
+        </span>
+
+        <button
+            class="logout"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+<div class="card">
+
+    <h2>Add Vehicle</h2>
+
+    <p class="welcome">
+        Staff vehicle entry
+    </p>
+
+    <form id="vehicleForm">
+
+        <div class="form-grid">
+
+            <div class="field">
+
+                <label>
+                    Vehicle Number
+                </label>
+
+                <input
+                    id="vehicleNumber"
+                    type="text"
+                    placeholder="KA01AB1234"
+                    required>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Owner Name
+                </label>
+
+                <input
+                    id="ownerName"
+                    type="text"
+                    placeholder="Owner Name"
+                    required>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Phone Number
+                </label>
+
+                <input
+                    id="phone"
+                    type="tel"
+                    placeholder="Phone Number">
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Vehicle Name
+                </label>
+
+                <input
+                    id="vehicleName"
+                    type="text"
+                    placeholder="Maruti / Hyundai / Tata...">
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Service
+                </label>
+
+                <select id="service">
+
+                    <option value="">
+                        Select Service
+                    </option>
+
+                    <option>
+                        Full Wash
+                    </option>
+
+                    <option>
+                        Interior Cleaning
+                    </option>
+
+                    <option>
+                        Body Wash
+                    </option>
+
+                    <option>
+                        PPF
+                    </option>
+
+                    <option>
+                        Maintenance
+                    </option>
+
+                    <option>
+                        Rubbing Polish
+                    </option>
+
+                    <option>
+                        Ceramic Coating
+                    </option>
+
+                    <option>
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Entry Time
+                </label>
+
+                <input
+                    id="entryTime"
+                    type="datetime-local">
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Amount
+                </label>
+
+                <input
+                    id="amount"
+                    type="number"
+                    min="0"
+                    placeholder="0">
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Payment
+                </label>
+
+                <select id="payment">
+
+                    <option value="">
+                        Not Paid
+                    </option>
+
+                    <option>
+                        CASH
+                    </option>
+
+                    <option>
+                        PHONEPE
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field full">
+
+                <label>
+                    Remark
+                </label>
+
+                <textarea
+                    id="remark"
+                    placeholder="Optional remark"></textarea>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="submit"
+            type="submit">
+
+            Add Vehicle
+
+        </button>
+
+    </form>
+
+
+    <div
+        id="message"
+        class="message">
+    </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbwoKohiflL0GrN8fqjZyzo-z16EA3m4Q8hqWavbc8oH1iL7W3rOQ6K1M-WLH6UiUFU8/exec";
+
+
+// =====================================================
+// LOGIN CHECK
+// =====================================================
+
+const token =
+sessionStorage.getItem("a1Token");
+
+const role =
+sessionStorage.getItem("a1Role");
+
+const staffName =
+sessionStorage.getItem("a1StaffName");
+
+if (!token || role !== "staff") {
+
+    window.location.href =
+        "staff-login.html";
+
+}
+
+document.getElementById(
+    "staffName"
+).textContent =
+    staffName || "Staff";
+
+
+// =====================================================
+// CURRENT TIME
+// =====================================================
+
+function setCurrentTime() {
+
+    const now = new Date();
+
+    const local =
+        new Date(
+            now.getTime()
+            - now.getTimezoneOffset() * 60000
+        )
+        .toISOString()
+        .slice(0, 16);
+
+    document.getElementById(
+        "entryTime"
+    ).value = local;
+
+}
+
+setCurrentTime();
+
+
+// =====================================================
+// ADD VEHICLE
+// =====================================================
+
+document.getElementById(
+    "vehicleForm"
+).addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+        const vehicleNumber =
+            document.getElementById(
+                "vehicleNumber"
+            ).value.trim().toUpperCase();
+
+        const ownerName =
+            document.getElementById(
+                "ownerName"
+            ).value.trim();
+
+        const phone =
+            document.getElementById(
+                "phone"
+            ).value.trim();
+
+        const vehicleName =
+            document.getElementById(
+                "vehicleName"
+            ).value.trim();
+
+        const service =
+            document.getElementById(
+                "service"
+            ).value;
+
+        const entryTime =
+            document.getElementById(
+                "entryTime"
+            ).value;
+
+        const amount =
+            document.getElementById(
+                "amount"
+            ).value || 0;
+
+        const payment =
+            document.getElementById(
+                "payment"
+            ).value;
+
+        const remark =
+            document.getElementById(
+                "remark"
+            ).value.trim();
+
+        if (!vehicleNumber || !ownerName) {
+
+            showMessage(
+                "Vehicle number and owner name are required",
+                false
+            );
+
+            return;
+
+        }
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL,
+                    {
+                        method: "POST",
+
+                        body: JSON.stringify({
+
+                            action: "addVehicle",
+
+                            token: token,
+
+                            vehicle_number:
+                                vehicleNumber,
+
+                            owner_name:
+                                ownerName,
+
+                            phone:
+                                phone,
+
+                            vehicle_type:
+                                vehicleName,
+
+                            service_type:
+                                service,
+
+                            entry_time:
+                                entryTime,
+
+                            amount:
+                                amount,
+
+                            paymentMethod:
+                                payment,
+
+                            status:
+                                "Inside",
+
+                            remark:
+                                remark
+
+                        })
+                    }
+                );
+
+            const result =
+                await response.json();
+
+            if (!result.success) {
+
+                if (
+                    result.message
+                    .toLowerCase()
+                    .includes("login")
+                ) {
+
+                    logout();
+
+                    return;
+
+                }
+
+                showMessage(
+                    result.message,
+                    false
+                );
+
+                return;
+
+            }
+
+            showMessage(
+                "Vehicle added successfully!",
+                true
+            );
+
+            document.getElementById(
+                "vehicleForm"
+            ).reset();
+
+            setCurrentTime();
+
+        } catch (error) {
+
+            console.error(error);
+
+            showMessage(
+                "Connection error. Please try again.",
+                false
+            );
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// MESSAGE
+// =====================================================
+
+function showMessage(text, success) {
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+    message.textContent = text;
+
+    message.className =
+        "message " +
+        (success ? "success" : "error");
+
+    message.style.display = "block";
+
+    setTimeout(function() {
+
+        message.style.display =
+            "none";
+
+    }, 3000);
+
+}
+
+
+// =====================================================
+// LOGOUT
+// =====================================================
+
+function logout() {
+
+    sessionStorage.removeItem(
+        "a1Token"
+    );
+
+    sessionStorage.removeItem(
+        "a1Role"
+    );
+
+    sessionStorage.removeItem(
+        "a1User"
+    );
+
+    sessionStorage.removeItem(
+        "a1StaffName"
+    );
+
+    window.location.href =
+        "staff-login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
